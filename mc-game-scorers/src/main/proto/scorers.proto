@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+option java_outer_classname = "ScorerConfigs";
+
+package com.xiaomi.dataming.scorers.config;
+
+enum ScorerEngine {
+     LR = 0;
+     DNN_NATIVE_HASH = 1;
+     DNN_NATIVE = 2;
+     BUILTIN = 3;
+}
+
+enum StrCollectorType {
+    HASH = 0;
+    RAW = 1;
+    DICT = 2;
+}
+
+message Scorer {
+     ScorerEngine engine = 1;
+     string model_name = 2;
+     string model_path = 3;
+     string model_address = 4;
+     repeated string model_servers = 5;
+     int64 model_version = 6;
+     string index_path = 7;
+     repeated string feature_extractors = 8;
+     string model_remote_path = 9;
+     StrCollectorType str_collector_type = 10;
+     string vocabulary_path = 11;
+     string input_tensor_name = 12;
+     string output_tensor_name = 13;
+     string user_output_tensor_name = 14;
+     string item_output_tensor_name = 15;
+}
+
+message Configuration {
+    map<string, Scorer> scorers = 1;
+}
